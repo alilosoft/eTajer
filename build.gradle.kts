@@ -22,3 +22,25 @@ dependencies {
 application {
     mainClassName = "etajer.cashier.AppKt"
 }
+
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+        //kotlinOptions.freeCompilerArgs = listOf("-Xallow-result-return-type")
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+    }
+    test {
+        useJUnitPlatform()
+    }
+    jar {
+        manifest {
+            attributes("Main-Class" to application.mainClassName)
+        }
+        from(configurations.runtimeClasspath
+                .get()
+                .map { file -> if (file.isDirectory) file else zipTree(file) }
+        )
+    }
+}
