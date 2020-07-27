@@ -5,9 +5,10 @@ import org.junit.jupiter.api.Test
 
 class ProductAssumptions {
 
-    fun testProduct() =  object : Product {
+    private fun testProduct() =  object : Product {
         override val id: Int = 0
         override val name: String = "test product"
+        override val price: Double = 10.0
     }
 
     @Test
@@ -28,6 +29,16 @@ class ProductAssumptions {
         // p.name = "immutable" // compile error
         // Assert
         assertNotNull(p.name)
+    }
+
+    @Test
+    fun `a Product should have a readonly price property`() {
+        // Arrange
+        val p = testProduct()
+        // Act
+        // p.price = 100.0 // compilation error
+        // Assert
+        assertNotNull(p.price)
     }
 
 }
