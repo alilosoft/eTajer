@@ -2,7 +2,6 @@ package etajer.cashier.objects
 
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.fail
 
 class ProductAssumptions {
     @Test
@@ -21,9 +20,5 @@ class ProductAssumptions {
     fun `Product id property should be readonly`() {
         //Product(0).id = 100 //compilation error
     }
-
-}
-
-class Product(val id: Int) {
 
 }
