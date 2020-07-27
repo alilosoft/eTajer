@@ -1,7 +1,7 @@
 package etajer.cashier.objects
 
-import org.junit.Test
-import kotlin.test.assertNotNull
+import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Test
 
 class ProductAssumptions {
     @Test
