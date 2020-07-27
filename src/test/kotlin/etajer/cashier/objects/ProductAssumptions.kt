@@ -11,8 +11,13 @@ class ProductAssumptions {
         assertNotNull(p, "we should create a Product with an id")
     }
 
+    @Test
+    fun `a Product should have an id property`() {
+        assertNotNull(Product(100).id)
+    }
+
 }
 
-class Product(id: Int) {
+class Product(var id: Int) {
 
 }
