@@ -6,3 +6,6 @@ build
 
 # Ignore Idea project files
 .idea
+
+# Ignore Idea build output directory
+out
