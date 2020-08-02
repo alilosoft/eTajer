@@ -14,7 +14,7 @@ class ProductsTest {
     }
 
     @Nested
-    inner class GetProductById(){
+    inner class GetProductById{
         @Test
         fun `when the id doesn't exist, should get an empty Optional`() {
             // Arrange
