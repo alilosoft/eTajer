@@ -10,6 +10,8 @@ repositories {
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom")) // Align versions of all Kotlin components
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    // data/jdbc
+    implementation("com.vladsch.kotlin-jdbc:kotlin-jdbc:0.5.0-beta-7")
     // logging
     implementation("ch.qos.logback:logback-classic:1.2.3")
     // test
