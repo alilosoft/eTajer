@@ -10,7 +10,9 @@ repositories {
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom")) // Align versions of all Kotlin components
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    // data/jdbc
+    // derby db
+    runtimeOnly("org.apache.derby:derbyclient:10.14.2.0")
+    // jdbc
     implementation("com.vladsch.kotlin-jdbc:kotlin-jdbc:0.5.0-beta-7")
     // logging
     implementation("ch.qos.logback:logback-classic:1.2.3")
