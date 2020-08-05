@@ -21,7 +21,7 @@ class ProductIntegrationTests {
 }
 
 class DbProduct(override val id: Int) : Product {
-    private val dataSource = DerbyDB.dataSource
+    private val dataSource = DerbyDb.dataSource
 
     override val name: String
         get() {

@@ -14,7 +14,7 @@ class ProductsIntegrationTests {
     @Test
     fun `get Product by barcode`() {
         // Arrange
-        assertNotNull(DerbyDB.dataSource, "should be connected to a derby database!")
+        assertNotNull(DerbyDb.dataSource, "should be connected to a derby database!")
         // Act
         val prod = DbProducts().byBarCode("005")
         // Assert
@@ -23,7 +23,7 @@ class ProductsIntegrationTests {
     }
 }
 
-class DbProducts(private val dataSource: DataSource = DerbyDB.dataSource,
+class DbProducts(private val dataSource: DataSource = DerbyDb.dataSource,
                  private val getProduct: GetProductFn = ::getDbProduct) : Products {
 
     // TODO: add logger
