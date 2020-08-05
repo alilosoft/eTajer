@@ -27,6 +27,7 @@ class DbProducts(private val dataSource: DataSource = DerbyDb.dataSource,
                  private val getProduct: GetProductFn = ::getDbProduct) : Products {
 
     // TODO: add logger
+
     override fun byId(id: Int): Optional<Product> {
         return Optional.empty()
     }
