@@ -10,6 +10,8 @@ repositories {
 dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom")) // Align versions of all Kotlin components
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    // koptional
+    implementation("com.gojuno.koptional:koptional:1.7.0")
     // derby db
     runtimeOnly("org.apache.derby:derbyclient:10.14.2.0")
     // jdbc

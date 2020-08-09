@@ -1,6 +1,7 @@
 package etajer.cashier.objects
 
-import java.util.*
+import com.gojuno.koptional.Optional
+
 
 interface Products {
     /**
