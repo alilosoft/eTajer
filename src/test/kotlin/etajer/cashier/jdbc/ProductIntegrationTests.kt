@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 
 class ProductIntegrationTests {
     @Test
-    fun `a Product should fetch it's name from DB`() {
+    fun `a Product should fetch its name from DB`() {
         // Arrange
         // TODO: make sure a Product with id = 123 exist!
         val id = 123
