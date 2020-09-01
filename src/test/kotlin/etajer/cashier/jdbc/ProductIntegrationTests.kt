@@ -18,6 +18,15 @@ class ProductIntegrationTests {
         // Assert
         assertEquals(productName , p.name)
     }
+
+    @Test
+    fun `a Product should fetch its price`() {
+        // Arrange
+        val p = DbProduct(123)
+        // Act
+        val price = p.price
+        // Assert
+    }
 }
 
 class DbProduct(override val id: Int) : Product {
