@@ -41,3 +41,17 @@ class DbProduct(override val id: Int) : Product {
     override val price: Double
         get() = TODO("Not yet implemented")
 }
+
+class BarCodedProduct(barCode: String): Product {
+    override val id: Int
+        // select id where barcode = $sku
+        get() = TODO("Not yet implemented")
+    override val name: String
+        // get the product_name + unit_name or variant_name
+        get() = TODO("Not yet implemented")
+    override val price: Double
+        // get/calc the price for the specific SKU if any else get the default price
+        // or return a Price object that knows how to calc/fetch the price given a barcode
+        get() = TODO("Not yet implemented")
+
+}
