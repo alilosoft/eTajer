@@ -33,6 +33,15 @@ class DbProducts(private val dataSource: DataSource = DerbyDb.dataSource,
 
     // TODO: add logger
 
+    /**
+     * insert the new product to DB
+     */
+    override fun add(name: String, price: Double): Product {
+        val sql = "INSERT INTO product SET name = ?, price = ?"
+        TODO("Not yet implemented")
+        // insert a new prod to DB
+    }
+
     override fun byId(id: Int): Optional<Product> {
         return None
     }
