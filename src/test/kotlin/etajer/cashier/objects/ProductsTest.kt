@@ -10,6 +10,21 @@ import org.junit.jupiter.api.Test
 class ProductsTest {
 
     @Nested
+    inner class AddNewProduct {
+        @Test
+        fun `add new product`() {
+            // Arrange
+            // Act
+            val prod1 = FakeProducts.add("My Product 1", 100.0)
+            val prod2 = FakeProducts.add("My Product 2", 150.0)
+            // Assert
+            assertTrue(prod1.id != prod2.id)
+            println(prod1)
+            println(prod2)
+        }
+    }
+
+    @Nested
     inner class GetProductById {
         @Test // happy path
         fun `when the id exist, get an Optional of Product`() {
@@ -53,6 +68,20 @@ class ProductsTest {
 }
 
 object FakeProducts : Products {
+    private var nextId = 1;
+    private val data = mutableMapOf<Int, Product>()
+
+    override fun add(name: String, price: Double): Product {
+        // create a fake product TODO: move this logic to a helper function!
+        val newProd = object : Product {
+            override val id by lazy { nextId++ }
+            override val name = name
+            override val price = price
+            override fun toString() = "FakeProduct(id:$id, name:$name, price:$price)"
+        }
+        data[newProd.id] = newProd
+        return newProd
+    }
 
     override fun byId(id: Int): Optional<Product> =
             if (id == 0) None
