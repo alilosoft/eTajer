@@ -1,6 +1,6 @@
 package etajer.cashier.objects
 
-interface SellUnit {
+interface SaleUnit {
     val name: String
     val qty: Int
     val price: Double
