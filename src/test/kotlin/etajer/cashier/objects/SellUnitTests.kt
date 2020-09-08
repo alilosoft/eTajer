@@ -21,13 +21,13 @@ val Milkospray1Kg = object : SellUnit {
     override val price: Double = 650.00
 }
 
-val WatterBottle = object : SellUnit {
+val WaterBottle = object : SellUnit {
     override val name: String = "Watter Ifri"
     override val qty: Int = 1
     override val price: Double = 35.00
 }
 
-val WatterFardo = object : SellUnit {
+val WaterFardo = object : SellUnit {
     val productName = "Watter Ifri"
     val unitName = "Fardo"
 
