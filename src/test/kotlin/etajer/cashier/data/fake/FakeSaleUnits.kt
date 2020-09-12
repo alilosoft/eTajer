@@ -1,5 +1,8 @@
 package etajer.cashier.data.fake
 
+import com.gojuno.koptional.Optional
+import com.gojuno.koptional.toOptional
+import etajer.cashier.objects.Product
 import etajer.cashier.objects.SaleUnit
 
 object FakeSaleUnits {
@@ -7,10 +10,14 @@ object FakeSaleUnits {
             "FACTO" to CoffeeFacto,
             "MLK500" to Milkospray500g,
             "MLK1000" to Milkospray1Kg,
-            "IFRI1" to WaterBottle,
-            "IFRI6" to WaterFardo
+            "IFRI1" to IfriBottle,
+            "IFRI6" to IfriFardo
     )
-    fun bySku(sku: String) = data[sku]
+
+    /**
+     * TODO: this function should implements an interface function defined in SaleUnits for example
+     */
+    fun bySku(sku: String): Optional<SaleUnit> = data[sku].toOptional()
 }
 
 val CoffeeFacto = object : SaleUnit {
@@ -31,17 +38,21 @@ val Milkospray1Kg = object : SaleUnit {
     override val price: Double = 650.00
 }
 
-val WaterBottle = object : SaleUnit {
+val IfriBottle = object : SaleUnit {
     override val name: String = "Watter Ifri"
     override val qty: Int = 1
     override val price: Double = 35.00
 }
 
-val WaterFardo = object : SaleUnit {
-    val productName = "Watter Ifri"
+val IfriFardo = object : SaleUnit {
+    val product = object : Product {
+        override val id: Int = 123
+        override val name: String = "Water Ifri"
+        override val price: Double = 35.0
+    }
     val unitName = "Fardo"
 
-    override val name: String = "$productName ($unitName)"
+    override val name: String = "${product.name} ($unitName)"
     override val qty: Int = 6
     override val price: Double = 180.00
 }
