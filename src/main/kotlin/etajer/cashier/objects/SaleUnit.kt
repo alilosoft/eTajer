@@ -3,9 +3,12 @@ package etajer.cashier.objects
 interface SaleUnit {
     val name: String
     /**
-     * The implementations of SaleUnit should decide/know how to set the price.
-     * It could be fixed unit price, or calculated based on the Product price
-     * using the formula S
+     * The Unitary price of the this sale unit.
+     *
+     * Only implementations of SaleUnit should decide/know how to set/calc/fetch their price.
+     *
+     * It could be a fixed price ind DB, or calculated based on another Unit price in case of a package,
+     * or a Promotional price...etc.
      */
     val price: Double
 }
