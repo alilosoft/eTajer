@@ -25,7 +25,7 @@ object FakeSaleUnits {
     )
 
     /**
-     * TODO: this object should implements an interface defined in SaleUnits for example
+     * TODO: this object should implements an interface SaleUnits for example
      */
     fun bySku(sku: String): Optional<SaleUnit> = data[sku].toOptional()
 }
@@ -40,7 +40,7 @@ fun createFakeSaleUnit(productName: String,
                        unitName: String = "",
                        qty: Int = 1,
                        unitPrice: Double) = object : SaleUnit {
-    // these data are encapsulated by hte SaleUnit impl, it could be fetched from a DB by the SKU for example.
+    // these data are encapsulated by the SaleUnit impl, it could be fetched from a DB by the SKU for example.
     private val nameDb = unitName // or "Fardo" for example, (by user)
     private val qtyDb = qty; // if an impl need to know the Qty packed by a unit, it could fetch it also!
     private val priceDb = unitPrice
