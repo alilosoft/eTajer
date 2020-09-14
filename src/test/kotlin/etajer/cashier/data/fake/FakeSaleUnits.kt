@@ -2,10 +2,24 @@ package etajer.cashier.data.fake
 
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
-import etajer.cashier.objects.Product
 import etajer.cashier.objects.SaleUnit
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+
+fun createFakeSaleUnit(productName: String,
+                       unitName: String = "",
+                       unitQty: Int = 1,
+                       unitPrice: Double) = object : SaleUnit {
+
+    override val name: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
+    override val price: Double = unitPrice
+}
+
+val ifriBottle = createFakeSaleUnit(productName = "Watter Ifri", unitPrice = 35.00)
+val ifriFardo = createFakeSaleUnit(productName = "Water Ifri", unitPrice = 170.00, unitName = "Fardo", unitQty = 6)
+val coffeeFacto = createFakeSaleUnit(productName = "Coffee Facto", unitPrice = 185.00)
+val milkospray500g = createFakeSaleUnit(productName = "Milkospray 500g", unitPrice = 370.00)
+val milkospray1Kg = createFakeSaleUnit(productName = "Milkospray 1Kg", unitPrice = 650.00)
 
 object FakeSKUs {
     const val FACTO = "FACTO"
@@ -15,85 +29,42 @@ object FakeSKUs {
     const val IFRI6B = "IFRI6B"
 }
 
+//TODO: this object should implements an interface SaleUnits
 object FakeSaleUnits {
     private val data = mapOf(
-            FakeSKUs.FACTO to CoffeeFacto,
-            FakeSKUs.MLK500 to Milkospray500g,
-            FakeSKUs.MLK1000 to Milkospray1Kg,
-            FakeSKUs.IFRI1B to IfriBottle,
-            FakeSKUs.IFRI6B to IfriFardo
+            FakeSKUs.FACTO to coffeeFacto,
+            FakeSKUs.MLK500 to milkospray500g,
+            FakeSKUs.MLK1000 to milkospray1Kg,
+            FakeSKUs.IFRI1B to ifriBottle,
+            FakeSKUs.IFRI6B to ifriFardo
     )
 
-    /**
-     * TODO: this object should implements an interface SaleUnits for example
-     */
     fun bySku(sku: String): Optional<SaleUnit> = data[sku].toOptional()
-}
-
-val IfriBottle = object : SaleUnit {
-    val sku = FakeSKUs.IFRI1B
-    override val name: String = "Watter Ifri"
-    override val price: Double = 35.00
-}
-
-fun createFakeSaleUnit(productName: String,
-                       unitName: String = "",
-                       qty: Int = 1,
-                       unitPrice: Double) = object : SaleUnit {
-    // these data are encapsulated by the SaleUnit impl, it could be fetched from a DB by the SKU for example.
-    private val nameDb = unitName // or "Fardo" for example, (by user)
-    private val qtyDb = qty; // if an impl need to know the Qty packed by a unit, it could fetch it also!
-    private val priceDb = unitPrice
-    private val productName = productName
-
-    override val name: String = "$productName (${if (nameDb.isNotBlank()) nameDb else "x$qtyDb"})"
-    override val price: Double = priceDb
-}
-
-val IfriFardo = object : SaleUnit {
-    // these data are encapsulated by hte SaleUnit impl, it could be fetched from a DB by the SKU for example.
-    private val nameDb = "Fardo" // or "Fardo" for example, (by user)
-    private val qtyDb = 6; // if an impl need to know the Qty packed by a unit, it could fetch it also!
-    private val priceDb = 180.00
-    private val productDb = object : Product {
-        override val id: Int = 123
-        override val name: String = "Water Ifri"
-        override val price: Double = 35.0
-    }
-
-    override val name: String = "${productDb.name} (${if (nameDb.isNotBlank()) nameDb else "x$qtyDb"})"
-    override val price: Double = 180.00
-}
-
-val CoffeeFacto = object : SaleUnit {
-    val sku = FakeSKUs.FACTO
-    override val name: String = "Coffee Facto"
-    override val price: Double = 180.00
-}
-
-val Milkospray500g = object : SaleUnit {
-    val sku = FakeSKUs.MLK500
-    override val name: String = "Milkospray 500g"
-    override val price: Double = 370.00
-}
-
-val Milkospray1Kg = object : SaleUnit {
-    val sku = FakeSKUs.MLK1000
-    override val name: String = "Milkospray 1Kg"
-    override val price: Double = 650.00
 }
 
 class FakeSaleUnitsTest {
     @Test
-    fun `build correct unit name`() {
+    fun `create fake SaleUnit with specific unitName`() {
         // Arrange
         val ifriFardo = createFakeSaleUnit(
                 productName = "Water Ifri",
                 unitName = "Fardo",
-                qty = 6,
+                unitQty = 6,
                 unitPrice = 180.00)
         // Act
         // Assert
-        Assertions.assertEquals("Water Ifri (Fardo)", IfriFardo.name)
+        assertEquals("Water Ifri (Fardo)", ifriFardo.name)
+    }
+
+    @Test
+    fun `create fake SaleUnit without a unitName`() {
+        // Arrange
+        val ifri6B = createFakeSaleUnit(
+                productName = "Water Ifri",
+                unitQty = 6,
+                unitPrice = 180.00)
+        // Act
+        // Assert
+        assertEquals("Water Ifri (x6)", ifri6B.name)
     }
 }
