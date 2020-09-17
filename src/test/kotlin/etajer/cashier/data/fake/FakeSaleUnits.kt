@@ -3,6 +3,7 @@ package etajer.cashier.data.fake
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
 import etajer.cashier.objects.SaleUnit
+import etajer.cashier.objects.SaleUnitBySku
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -30,7 +31,7 @@ object FakeSKUs {
 }
 
 //TODO: this object should implements an interface SaleUnits
-object FakeSaleUnits {
+object FakeSaleUnits : SaleUnitBySku {
     private val data = mapOf(
             FakeSKUs.FACTO to coffeeFacto,
             FakeSKUs.MLK500 to milkospray500g,
@@ -39,7 +40,7 @@ object FakeSaleUnits {
             FakeSKUs.IFRI6B to ifriFardo
     )
 
-    fun bySku(sku: String): Optional<SaleUnit> = data[sku].toOptional()
+    override fun find(sku: String): Optional<SaleUnit> = data[sku].toOptional()
 }
 
 class FakeSaleUnitsTest {

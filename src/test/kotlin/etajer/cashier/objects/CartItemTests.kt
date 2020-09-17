@@ -16,14 +16,14 @@ class CartItemTests {
     }
 }
 
-fun createCartItem(barCode: String,
+fun createCartItem(sku: String,
                    qty: Int,
-                   findSaleUnitBySku: (String) -> Optional<SaleUnit> = FakeSaleUnits::bySku): CartItem {
+                   saleUnitBySku: SaleUnitBySku = FakeSaleUnits): CartItem {
 
-    return when (val found = findSaleUnitBySku(barCode)) {
+    return when (val found = saleUnitBySku.find(sku)) {
         is Some ->
             object : CartItem {
-                val barCode: String = barCode // TODO: remove if not needed!
+                val barCode: String = sku // TODO: remove if not needed!
                 override val itemName: String = found.value.name // + (sale unit qty)
                 override val itemPrice: Double = found.value.price
                 override val soldQty: Int = qty
@@ -32,6 +32,10 @@ fun createCartItem(barCode: String,
         is None ->
             throw IllegalStateException("Item with barcode $barCode not found!")
     }
+}
+
+fun interface SaleUnitBySku {
+    fun find(sku: String): Optional<SaleUnit>
 }
 
 interface CartItem {
