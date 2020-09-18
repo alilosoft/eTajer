@@ -18,7 +18,7 @@ class CartItemTests {
 
 // This function could be part of a Cart API -> TODO!
 fun createCartItem(sku: String,
-                   qty: Int,
+                   qty: Int = 1,
                    saleUnitBySku: SaleUnitBySku = FakeSaleUnits): CartItem {
 
     return when (val found = saleUnitBySku.find(sku)) {
