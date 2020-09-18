@@ -16,6 +16,7 @@ class CartItemTests {
     }
 }
 
+// This function could be part of a Cart API -> TODO!
 fun createCartItem(sku: String,
                    qty: Int,
                    saleUnitBySku: SaleUnitBySku = FakeSaleUnits): CartItem {
@@ -23,11 +24,10 @@ fun createCartItem(sku: String,
     return when (val found = saleUnitBySku.find(sku)) {
         is Some ->
             object : CartItem {
-                val barCode: String = sku // TODO: remove if not needed!
-                override val itemName: String = found.value.name // + (sale unit qty)
+                val barCode: String = sku // TODO: remove or add to CartItem API
+                override val itemName: String = found.value.name
                 override val itemPrice: Double = found.value.price
                 override val soldQty: Int = qty
-
             }
         is None ->
             throw IllegalStateException("Item with barcode $barCode not found!")
@@ -39,8 +39,8 @@ fun interface SaleUnitBySku {
 }
 
 interface CartItem {
-    val itemName: String // Water Ifri
-    val soldQty: Int //
-    val itemPrice: Double // 180.00
+    val itemName: String
+    val soldQty: Int
+    val itemPrice: Double
     fun total() = soldQty * itemPrice
 }
