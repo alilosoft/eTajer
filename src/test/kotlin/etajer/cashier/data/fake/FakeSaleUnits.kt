@@ -16,12 +16,6 @@ fun createFakeSaleUnit(productName: String,
     override val price: Double = unitPrice
 }
 
-val ifriBottle = createFakeSaleUnit(productName = "Watter Ifri", unitPrice = 35.00)
-val ifriFardo = createFakeSaleUnit(productName = "Water Ifri", unitPrice = 170.00, unitName = "Fardo", unitQty = 6)
-val coffeeFacto = createFakeSaleUnit(productName = "Coffee Facto", unitPrice = 185.00)
-val milkospray500g = createFakeSaleUnit(productName = "Milkospray 500g", unitPrice = 370.00)
-val milkospray1Kg = createFakeSaleUnit(productName = "Milkospray 1Kg", unitPrice = 650.00)
-
 object FakeSKUs {
     const val FACTO = "FACTO"
     const val MLK500 = "MLK50O"
@@ -32,6 +26,12 @@ object FakeSKUs {
 
 //TODO: this object should implements an interface SaleUnits
 object FakeSaleUnits : SaleUnitBySku {
+    val ifriBottle = createFakeSaleUnit(productName = "Watter Ifri", unitPrice = 35.00)
+    val ifriFardo = createFakeSaleUnit(productName = "Water Ifri", unitPrice = 170.00, unitName = "Fardo", unitQty = 6)
+    val coffeeFacto = createFakeSaleUnit(productName = "Coffee Facto", unitPrice = 185.00)
+    val milkospray500g = createFakeSaleUnit(productName = "Milkospray 500g", unitPrice = 370.00)
+    val milkospray1Kg = createFakeSaleUnit(productName = "Milkospray 1Kg", unitPrice = 650.00)
+
     private val data = mapOf(
             FakeSKUs.FACTO to coffeeFacto,
             FakeSKUs.MLK500 to milkospray500g,
