@@ -1,4 +1,4 @@
-package demo
+package kotlin_sam_demo
 
 import java.util.function.Consumer
 
