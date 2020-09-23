@@ -5,8 +5,10 @@ import com.vladsch.kotlin.jdbc.using
 import com.zaxxer.hikari.HikariDataSource
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled
 class DerbyDbTests {
     @Test
     fun `should be using HikariCP datasource`() {

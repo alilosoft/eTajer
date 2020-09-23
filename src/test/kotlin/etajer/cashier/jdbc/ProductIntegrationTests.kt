@@ -3,9 +3,11 @@ package etajer.cashier.jdbc
 import com.vladsch.kotlin.jdbc.session
 import com.vladsch.kotlin.jdbc.sqlQuery
 import etajer.cashier.objects.Product
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
+@Disabled
 class ProductIntegrationTests {
     @Test
     fun `a Product should fetch its name from DB`() {
