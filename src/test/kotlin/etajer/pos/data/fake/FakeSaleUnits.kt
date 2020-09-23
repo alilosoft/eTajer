@@ -1,9 +1,9 @@
-package etajer.cashier.data.fake
+package etajer.pos.data.fake
 
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
-import etajer.cashier.objects.SaleUnit
-import etajer.cashier.objects.SaleUnitBySku
+import etajer.pos.objects.SaleUnit
+import etajer.pos.objects.SaleUnitBySku
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 

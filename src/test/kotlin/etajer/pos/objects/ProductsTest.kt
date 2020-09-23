@@ -1,4 +1,4 @@
-package etajer.cashier.objects
+package etajer.pos.objects
 
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional

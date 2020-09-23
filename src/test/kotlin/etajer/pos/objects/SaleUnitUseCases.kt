@@ -1,4 +1,4 @@
-package etajer.cashier.objects
+package etajer.pos.objects
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

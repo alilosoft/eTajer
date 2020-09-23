@@ -1,10 +1,10 @@
-package etajer.cashier.objects
+package etajer.pos.objects
 
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
-import etajer.cashier.data.fake.FakeSaleUnits
+import etajer.pos.data.fake.FakeSaleUnits
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

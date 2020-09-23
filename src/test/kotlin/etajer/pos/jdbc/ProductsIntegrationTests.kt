@@ -1,12 +1,12 @@
-package etajer.cashier.jdbc
+package etajer.pos.jdbc
 
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.vladsch.kotlin.jdbc.session
 import com.vladsch.kotlin.jdbc.sqlQuery
-import etajer.cashier.objects.Product
-import etajer.cashier.objects.Products
+import etajer.pos.objects.Product
+import etajer.pos.objects.Products
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test

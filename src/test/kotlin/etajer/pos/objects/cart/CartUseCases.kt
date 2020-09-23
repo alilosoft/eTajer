@@ -1,8 +1,8 @@
-package etajer.cashier.objects.cart
+package etajer.pos.objects.cart
 
-import etajer.cashier.data.fake.FakeSKUs
-import etajer.cashier.objects.CartItem
-import etajer.cashier.objects.createCartItemBySku
+import etajer.pos.data.fake.FakeSKUs
+import etajer.pos.objects.CartItem
+import etajer.pos.objects.createCartItemBySku
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDate

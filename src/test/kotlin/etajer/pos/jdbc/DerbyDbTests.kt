@@ -1,4 +1,4 @@
-package etajer.cashier.jdbc
+package etajer.pos.jdbc
 
 import com.vladsch.kotlin.jdbc.session
 import com.vladsch.kotlin.jdbc.using
