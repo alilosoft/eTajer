@@ -1,8 +1,6 @@
 package etajer.pos.objects.cart
 
 import etajer.pos.data.fake.FakeSKUs
-import etajer.pos.objects.CartItem
-import etajer.pos.objects.createCartItemBySku
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
