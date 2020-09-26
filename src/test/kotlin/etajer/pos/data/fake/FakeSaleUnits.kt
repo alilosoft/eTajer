@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test
 fun createFakeSaleUnit(productName: String,
                        unitName: String = "",
                        unitQty: Int = 1,
-                       unitPrice: Double) = object : SaleUnit {
-
-    override val name: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
-    override val price: Double = unitPrice
-}
+                       unitPrice: Double) =
+        object : SaleUnit {
+            override val name: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
+            override val price: Double = unitPrice
+        }
 
 object FakeSKUs {
     const val FACTO = "FACTO"
