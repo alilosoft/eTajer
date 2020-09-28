@@ -1,4 +1,4 @@
-package etajer.cashier.jdbc
+package etajer.pos.jdbc
 
 import com.vladsch.kotlin.jdbc.HikariCP
 import javax.sql.DataSource

@@ -1,20 +1,20 @@
-package etajer.cashier.data.fake
+package etajer.pos.data.fake
 
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
-import etajer.cashier.objects.SaleUnit
-import etajer.cashier.objects.SaleUnitBySku
+import etajer.pos.objects.SaleUnit
+import etajer.pos.objects.cart.SaleUnitBySku
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 fun createFakeSaleUnit(productName: String,
                        unitName: String = "",
                        unitQty: Int = 1,
-                       unitPrice: Double) = object : SaleUnit {
-
-    override val name: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
-    override val price: Double = unitPrice
-}
+                       unitPrice: Double) =
+        object : SaleUnit {
+            override val name: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
+            override val price: Double = unitPrice
+        }
 
 object FakeSKUs {
     const val FACTO = "FACTO"

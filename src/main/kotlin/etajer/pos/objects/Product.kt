@@ -1,4 +1,4 @@
-package etajer.cashier.objects
+package etajer.pos.objects
 
 interface Product {
     /**

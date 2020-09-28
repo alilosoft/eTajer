@@ -1,17 +1,20 @@
-package etajer.cashier.jdbc
+package etajer.pos.jdbc
 
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.vladsch.kotlin.jdbc.session
 import com.vladsch.kotlin.jdbc.sqlQuery
-import etajer.cashier.objects.Product
-import etajer.cashier.objects.Products
+import etajer.pos.objects.Product
+import etajer.pos.objects.Products
 import org.junit.jupiter.api.Assertions.assertNotNull
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import javax.sql.DataSource
 
+//TODO re-enable this test after adding appropriate mechanism (i.e: test containers for db)
+// to run the tests against a real (temp) data base!
+@Disabled
 class ProductsIntegrationTests {
     @Test
     fun `get Product by barcode`() {
@@ -21,7 +24,7 @@ class ProductsIntegrationTests {
         val prod = DbProducts().byBarCode("005")
         // Assert
         assertNotNull(prod.toNullable())
-        when(prod){
+        when (prod) {
             is Some -> prod.value
             is None -> println("not found")
         }
