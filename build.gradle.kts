@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "1.4.10"
     application
+    checkstyle
 }
 
 repositories {
@@ -48,5 +49,8 @@ tasks {
                 .get()
                 .map { file -> if (file.isDirectory) file else zipTree(file) }
         )
+    }
+    checkstyleMain {
+        println("running checkstyle....✅")
     }
 }
