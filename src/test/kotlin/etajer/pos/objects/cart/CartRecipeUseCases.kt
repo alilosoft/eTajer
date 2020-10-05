@@ -15,9 +15,9 @@ class CartRecipeUseCases {
         var printSpy = false;
         val consoleRecipe = object : CartRecipe {
             // a real impl could/should get the Cart by it's ctor.
-            private val cart = fakeCart
+            private val cart = createFakeCart()
             override fun print() {
-                println(fakeCart)
+                println(cart)
                 printSpy = true
             }
         }
@@ -30,11 +30,13 @@ class CartRecipeUseCases {
     @Test
     fun `CartRecipe decide how to print a Cart`() {
         // Arrange
-        fakeCart.addItem(createCartItemBySku(FakeSKUs.IFRI1B, 3))
-        fakeCart.addItem(createCartItemBySku(FakeSKUs.IFRI6B, 1))
-        fakeCart.addItem(createCartItemBySku(FakeSKUs.FACTO, 2))
         val formattedRecipe = object : CartRecipe {
-            private val cart = fakeCart
+            private val cart = createFakeCart().apply {
+                addItem(createCartItemBySku(FakeSKUs.IFRI1B, 3))
+                addItem(createCartItemBySku(FakeSKUs.IFRI6B, 1))
+                addItem(createCartItemBySku(FakeSKUs.FACTO, 2))
+            }
+
             override fun print() {
                 val lineFormat = "%-25s | %-5s| %-3s| %-5s"
 

@@ -17,35 +17,35 @@ interface Cart : Iterable<CartItem> {
     fun removeItem(item: CartItem)
 }
 
-val fakeCart = object : Cart {
-    override val number: Int = 1
-    override val date: LocalDate = LocalDate.now()
-    override val time: LocalTime = LocalTime.now()
+fun createFakeCart(number: Int = 1,
+                   date: LocalDate = LocalDate.now(),
+                   time: LocalTime = LocalTime.now()) =
+        object : Cart {
+            override val number: Int = 1
+            override val date: LocalDate = date
+            override val time: LocalTime = time
 
-    private val items = mutableListOf<CartItem>()
-    override fun addItem(item: CartItem) {
-        items.add(item)
-    }
+            private val items = mutableListOf<CartItem>()
+            override fun addItem(item: CartItem) {
+                items.add(item)
+            }
 
-    override fun removeItem(item: CartItem) {
-        items.remove(item)
-    }
+            override fun removeItem(item: CartItem) {
+                items.remove(item)
+            }
 
-    override fun iterator(): Iterator<CartItem> = items.iterator()
+            override fun iterator(): Iterator<CartItem> = items.iterator()
 
-    override fun toString(): String {
-
-        return """Cart (FakeImpl) N°: $number, Date: $date, Time: $time
-            |Items: 
-            |${items.map { "${it.itemName} Price: ${it.itemPrice} Qty: ${it.soldQty}" }}
-        """.trimMargin()
-    }
-}
+            override fun toString(): String {
+                return """Cart (FakeImpl) N°: $number, Date: $date, Time: $time"""
+            }
+        }
 
 class CartUseCases {
     @Test
     fun `add an item to a Cart (fake) impl`() {
         // Arrange
+        val fakeCart = createFakeCart()
         val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
         // Act
         fakeCart.addItem(facto)
@@ -57,6 +57,7 @@ class CartUseCases {
     @Test
     fun `remove an (existing) item from th Cart`() {
         // Arrange
+        val fakeCart = createFakeCart()
         val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
         // Act
         fakeCart.addItem(facto)
