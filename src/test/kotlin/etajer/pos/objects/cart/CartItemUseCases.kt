@@ -65,8 +65,23 @@ fun interface SaleUnitBySku {
 }
 
 interface CartItem {
-    val itemName: String // as shown to user in receipt
-    val soldQty: Int // number of units sold of an item
-    val itemPrice: Double // final sale price (after discount if any)
+    /**
+     * name of the sold item as shown to user (in a receipt for example)
+     */
+    val itemName: String
+
+    /**
+     * number of sold units in this item
+     */
+    val soldQty: Int
+
+    /**
+     * final sale price of this cart item (after discount or any calc)
+     */
+    val itemPrice: Double
+
+    /**
+     * total price of this item
+     */
     fun total() = soldQty * itemPrice
 }
