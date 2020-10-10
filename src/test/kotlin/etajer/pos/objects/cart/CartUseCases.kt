@@ -7,6 +7,33 @@ import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.time.LocalTime
 
+class CartUseCases {
+    @Test
+    fun `add an item to a Cart (fake) impl`() {
+        // Arrange
+        val fakeCart = createFakeCart()
+        val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
+        // Act
+        fakeCart.addItem(facto)
+        println(fakeCart)
+        // Assert
+        assertTrue(fakeCart.iterator().hasNext())
+    }
+
+    @Test
+    fun `remove an (existing) item from th Cart`() {
+        // Arrange
+        val fakeCart = createFakeCart()
+        val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
+        // Act
+        fakeCart.addItem(facto)
+        assertTrue(fakeCart.iterator().hasNext())
+        fakeCart.removeItem(facto)
+        // Assert
+        assertFalse(fakeCart.iterator().hasNext())
+    }
+}
+
 interface Cart : Iterable<CartItem> {
     val number: Int
     val date: LocalDate
@@ -40,30 +67,3 @@ fun createFakeCart(number: Int = 1,
                 return """Cart (FakeImpl) N°: $number, Date: $date, Time: $time"""
             }
         }
-
-class CartUseCases {
-    @Test
-    fun `add an item to a Cart (fake) impl`() {
-        // Arrange
-        val fakeCart = createFakeCart()
-        val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
-        // Act
-        fakeCart.addItem(facto)
-        println(fakeCart)
-        // Assert
-        assertTrue(fakeCart.iterator().hasNext())
-    }
-
-    @Test
-    fun `remove an (existing) item from th Cart`() {
-        // Arrange
-        val fakeCart = createFakeCart()
-        val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
-        // Act
-        fakeCart.addItem(facto)
-        assertTrue(fakeCart.iterator().hasNext())
-        fakeCart.removeItem(facto)
-        // Assert
-        assertFalse(fakeCart.iterator().hasNext())
-    }
-}
