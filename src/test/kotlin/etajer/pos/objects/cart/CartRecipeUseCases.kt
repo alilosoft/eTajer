@@ -8,6 +8,22 @@ interface CartRecipe {
     fun print()
 }
 
+fun consoleRecipe(cart: Cart) = object : CartRecipe {
+    override fun print() {
+        val lineFormat = "%-25s | %-5s| %-3s| %-5s"
+
+        val recipe = """Recipe N°: ${cart.number}, Date: ${cart.date}, Time: ${"%tT".format(cart.time)} 
+                    |${lineFormat.format("Product", "Price", "Qty", "Total")}
+                    |${"-".repeat(45)}
+                    |${
+            cart.fold("", { acc, item -> "$acc${lineFormat.format(item.itemName, item.itemPrice, item.soldQty, item.total())}\n" })
+        }
+        |${"-".repeat(45)}
+        |${"%45s".format("Total: ${cart.total()}\n")}""".trimMargin()
+        println(recipe)
+    }
+}
+
 class CartRecipeUseCases {
     @Test
     fun `print CartRecipe to console`() {
@@ -30,27 +46,14 @@ class CartRecipeUseCases {
     @Test
     fun `CartRecipe decide how to print a Cart`() {
         // Arrange
-        val formattedRecipe = object : CartRecipe {
-            private val cart = createFakeCart().apply {
-                addItem(createCartItemBySku(FakeSKUs.IFRI1B, 3))
-                addItem(createCartItemBySku(FakeSKUs.IFRI6B, 1))
-                addItem(createCartItemBySku(FakeSKUs.FACTO, 2))
-            }
-
-            override fun print() {
-                val lineFormat = "%-25s | %-5s| %-3s| %-5s"
-
-                val recipe = """Recipe N°: ${cart.number}, Date: ${cart.date}, Time: ${"%tT".format(cart.time)} 
-                    |${lineFormat.format("Product", "Price", "Qty", "Total")}
-                    |${"-".repeat(45)}
-                    |${
-                    cart.fold("", { acc, item -> "$acc${lineFormat.format(item.itemName, item.itemPrice, item.soldQty, item.total())}\n" })
-                }""".trimMargin()
-                println(recipe)
-            }
+        val cart = createFakeCart().apply {
+            addItem(createCartItemBySku(FakeSKUs.IFRI1B, 3))
+            addItem(createCartItemBySku(FakeSKUs.IFRI6B, 1))
+            addItem(createCartItemBySku(FakeSKUs.FACTO, 2))
         }
+        val receipt = consoleRecipe(cart)
         // Act
-        formattedRecipe.print()
+        receipt.print()
         // Assert
     }
 }
