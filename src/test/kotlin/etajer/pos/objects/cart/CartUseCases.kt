@@ -42,6 +42,7 @@ interface Cart : Iterable<CartItem> {
     // TODO: return a boolean for add and remove
     fun addItem(item: CartItem)
     fun removeItem(item: CartItem)
+    fun total() = sumByDouble { it.total() }
 }
 
 fun createFakeCart(number: Int = 1,
