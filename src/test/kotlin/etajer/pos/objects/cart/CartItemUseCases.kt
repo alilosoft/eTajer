@@ -20,7 +20,7 @@ class CartItemUseCases {
         val coffeeFacto = FakeSaleUnits.coffeeFacto
         val fakeSaleUnitBySku = SaleUnitBySku { coffeeFacto.toOptional() }
         // Act
-        val cartItem = createCartItemBySku("VALID SKU", saleUnitBySku = fakeSaleUnitBySku)
+        val cartItem = createFakeCartItem("VALID SKU", saleUnitBySku = fakeSaleUnitBySku)
         // Assert
         assertEquals(coffeeFacto.name, cartItem.itemName)
         assertEquals(coffeeFacto.price, cartItem.itemPrice)
@@ -31,7 +31,7 @@ class CartItemUseCases {
         // Arrange
         val invalidSku = "INVALID"
         // Act
-        val ex = assertThrows<Exception> { createCartItemBySku(invalidSku) }
+        val ex = assertThrows<Exception> { createFakeCartItem(invalidSku) }
         // Assert
         assertTrue(ex is IllegalArgumentException)
         println(ex.message)
@@ -39,10 +39,14 @@ class CartItemUseCases {
 
 }
 
+typealias CartItemBySkuFn = (String) -> CartItem
+
+val fakeCartItemBySkuFn: CartItemBySkuFn = { sku -> createFakeCartItem(sku) }
+
 // This function could be part of a Cart API -> TODO!
-fun createCartItemBySku(sku: String,
-                        qty: Int = 1,
-                        saleUnitBySku: SaleUnitBySku = FakeSaleUnits): CartItem {
+fun createFakeCartItem(sku: String,
+                       qty: Int = 1,
+                       saleUnitBySku: SaleUnitBySku = FakeSaleUnits): CartItem {
 
     return when (val found = saleUnitBySku.find(sku)) {
         is Some ->
