@@ -62,7 +62,7 @@ fun createFakeCartItem(sku: String,
 }
 
 /**
- * Clients that needs to create a CartItem using a SKU need to provide an Impl of this interface
+ * Clients that needs to find a SaleUnit using its SKU need to provide an Impl of this interface
  */
 fun interface SaleUnitBySku {
     fun find(sku: String): Optional<SaleUnit>

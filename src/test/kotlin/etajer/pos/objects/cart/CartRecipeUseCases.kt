@@ -47,9 +47,9 @@ class CartRecipeUseCases {
     fun `CartRecipe decide how to print a Cart`() {
         // Arrange
         val cart = createFakeCart().apply {
-            addItem(createCartItemBySku(FakeSKUs.IFRI1B, 3))
-            addItem(createCartItemBySku(FakeSKUs.IFRI6B, 1))
-            addItem(createCartItemBySku(FakeSKUs.FACTO, 2))
+            addItem(createFakeCartItem(FakeSKUs.IFRI1B, 3))
+            addItem(createFakeCartItem(FakeSKUs.IFRI6B, 1))
+            addItem(createFakeCartItem(FakeSKUs.FACTO, 2))
         }
         val receipt = consoleRecipe(cart)
         // Act
