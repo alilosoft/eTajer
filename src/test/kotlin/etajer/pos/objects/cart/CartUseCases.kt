@@ -14,7 +14,7 @@ class CartUseCases {
     fun `add an item to a Cart (fake) impl`() {
         // Arrange
         val fakeCart = createFakeCart()
-        val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
+        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)
         // Act
         fakeCart.addItem(facto)
         println(fakeCart)
@@ -26,7 +26,7 @@ class CartUseCases {
     fun `remove an (existing) item from th Cart`() {
         // Arrange
         val fakeCart = createFakeCart()
-        val facto = createCartItemBySku(FakeSKUs.FACTO, 2)
+        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)
         // Act
         fakeCart.addItem(facto)
         assertTrue(fakeCart.iterator().hasNext())
@@ -84,9 +84,13 @@ fun createFakeCart(number: Int = -1,
 
             // TODO: chose between the following impls.
             // encapsulated dep. should be passed to a real impl. via the ctor.
+            // a SaleUnitBySku could be used to create a CartItem directly inside the Cart in addBySku(sku) method,
+            // doesn't that violate SRP?
             private val unitBySku: SaleUnitBySku = FakeSaleUnits // SAM object
 
             // encapsulated dep. should be passed to real impl. via ctor.
+            // a CartItemBySkuFn impl will be responsible for creating the CartItem and returning it to Cart
+            // this will make the logic of creating CartItem independent of Cart, but do we really need this?
             private val createItemBySku: CartItemBySkuFn = fakeCartItemBySkuFn // functional
 
             // create, return & store the item in the Cart items data
