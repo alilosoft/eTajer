@@ -65,7 +65,7 @@ interface Cart : Iterable<CartItem> {
     // TODO: return a boolean for add and remove
     /** add an item to the Cart by its SKU */
     fun addBySku(sku: String): CartItem
-    fun addItem(item: CartItem)
+    fun addItem(item: CartItem) // TODO: remove
     fun removeItem(item: CartItem)
     fun total() = sumByDouble { it.total() }
 }
