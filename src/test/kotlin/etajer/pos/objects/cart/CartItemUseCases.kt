@@ -4,6 +4,7 @@ import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
+import etajer.pos.data.fake.FakeSKUs
 import etajer.pos.data.fake.FakeSaleUnits
 import etajer.pos.objects.SaleUnit
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -37,6 +38,17 @@ class CartItemUseCases {
         println(ex.message)
     }
 
+    @Test
+    fun `a CartItem could change the qty of sold Units`() {
+        // Arrange
+        val item = createFakeCartItem(sku = FakeSKUs.FACTO, qty = 2)
+        assertEquals(2, item.soldQty)
+        // Act
+        item.changeQty(5)
+        // Assert
+        assertEquals(5, item.soldQty)
+    }
+
 }
 
 typealias CartItemBySkuFn = (String) -> CartItem
@@ -48,12 +60,20 @@ fun createFakeCartItem(sku: String,
                        qty: Int = 1,
                        saleUnitBySku: SaleUnitBySku = FakeSaleUnits): CartItem {
 
-    return when (val found = saleUnitBySku.find(sku)) {
+    return when (val saleUnit = saleUnitBySku.find(sku)) {
         is Some ->
             object : CartItem {
-                override val itemName: String = found.value.name
-                override val itemPrice: Double = found.value.price
-                override val soldQty: Int = qty
+                private val data = mutableMapOf<String, Any>(
+                        "name" to saleUnit.value.name,
+                        "price" to saleUnit.value.price,
+                        "qty" to qty)
+
+                override val itemName: String = data["name"] as String
+                override val soldQty: Int // TODO: use a function instead of property with getter
+                    get() = data["qty"] as Int
+                override val itemPrice: Double = data["price"] as Double
+
+                override fun changeQty(newQty: Int) = synchronized(this) { data["qty"] = newQty }
             }
         is None ->
             // TODO: throw custom exception or return Optional
@@ -78,6 +98,11 @@ interface CartItem {
      * number of sold units in this item
      */
     val soldQty: Int
+
+    /**
+     * change the Qty of sold units by this item
+     */
+    fun changeQty(newQty: Int)
 
     /**
      * final sale price of this cart item (after discount or any calc)
