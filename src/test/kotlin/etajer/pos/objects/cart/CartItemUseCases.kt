@@ -51,9 +51,9 @@ class CartItemUseCases {
 
 }
 
-typealias CartItemBySkuFn = (String) -> CartItem
+typealias CartItemBySkuFn = (String, Int) -> CartItem
 
-val fakeCartItemBySkuFn: CartItemBySkuFn = { sku -> createFakeCartItem(sku) }
+val fakeCartItemBySkuFn: CartItemBySkuFn = { sku, qty -> createFakeCartItem(sku, qty) }
 
 // This function could be part of a Cart API -> TODO!
 fun createFakeCartItem(sku: String,

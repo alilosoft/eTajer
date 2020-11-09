@@ -2,8 +2,7 @@ package etajer.pos.objects.cart
 
 import etajer.pos.data.fake.FakeSKUs
 import etajer.pos.data.fake.FakeSaleUnits
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
@@ -55,6 +54,26 @@ class CartUseCases {
         // Assert
         assertTrue(cart.contains(item))
     }
+
+    @Test
+    fun `add an item to a Cart with SKU & default qty = 1`() {
+        // Arrange
+        val cart = createFakeCart()
+        // Act
+        val item = cart.addBySku(FakeSKUs.FACTO)
+        // Assert
+        assertEquals(1, item.soldQty)
+    }
+
+    @Test
+    fun `specify the qty of sold units when adding an item to Cart by SKU`() {
+        // Arrange
+        val cart = createFakeCart()
+        // Act
+        val item = cart.addBySku(FakeSKUs.FACTO, qty = 3)
+        // Assert
+        assertEquals(3, item.soldQty)
+    }
 }
 
 interface Cart : Iterable<CartItem> {
@@ -64,7 +83,7 @@ interface Cart : Iterable<CartItem> {
 
     // TODO: return a boolean for add and remove
     /** add an item to the Cart by its SKU */
-    fun addBySku(sku: String): CartItem
+    fun addBySku(sku: String, qty: Int = 1): CartItem
     fun addItem(item: CartItem) // TODO: remove
     fun removeItem(item: CartItem)
     fun total() = sumByDouble { it.total() }
@@ -85,7 +104,7 @@ fun createFakeCart(number: Int = -1,
             // TODO: chose between the following impls.
             // encapsulated dep. should be passed to a real impl. via the ctor.
             // a SaleUnitBySku could be used to create a CartItem directly inside the Cart in addBySku(sku) method,
-            // doesn't that violate SRP?
+            // Question: doesn't that violate SRP?
             private val unitBySku: SaleUnitBySku = FakeSaleUnits // SAM object
 
             // encapsulated dep. should be passed to real impl. via ctor.
@@ -94,7 +113,7 @@ fun createFakeCart(number: Int = -1,
             private val createItemBySku: CartItemBySkuFn = fakeCartItemBySkuFn // functional
 
             // create, return & store the item in the Cart items data
-            override fun addBySku(sku: String): CartItem = createItemBySku(sku).apply(items::add)
+            override fun addBySku(sku: String, qty: Int): CartItem = createItemBySku(sku, qty).apply(items::add)
 
             override fun addItem(item: CartItem) {
                 items.add(item)
