@@ -1,4 +1,4 @@
-package etajer.pos.data.fake
+package etajer.fake
 
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional

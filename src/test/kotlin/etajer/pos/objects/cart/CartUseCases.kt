@@ -1,7 +1,7 @@
 package etajer.pos.objects.cart
 
-import etajer.pos.data.fake.FakeSKUs
-import etajer.pos.data.fake.FakeSaleUnits
+import etajer.fake.FakeSKUs
+import etajer.fake.FakeSaleUnits
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

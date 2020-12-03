@@ -4,8 +4,8 @@ import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
-import etajer.pos.data.fake.FakeSKUs
-import etajer.pos.data.fake.FakeSaleUnits
+import etajer.fake.FakeSKUs
+import etajer.fake.FakeSaleUnits
 import etajer.pos.objects.SaleUnit
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -58,7 +58,8 @@ val fakeCartItemBySkuFn: CartItemBySkuFn = { sku, qty -> createFakeCartItem(sku,
 // This function could be part of a Cart API -> TODO!
 fun createFakeCartItem(sku: String,
                        qty: Int = 1,
-                       saleUnitBySku: SaleUnitBySku = FakeSaleUnits): CartItem {
+                       saleUnitBySku: SaleUnitBySku = FakeSaleUnits
+): CartItem {
 
     return when (val saleUnit = saleUnitBySku.find(sku)) {
         is Some ->
