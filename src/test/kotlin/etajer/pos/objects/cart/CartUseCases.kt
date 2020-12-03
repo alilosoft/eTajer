@@ -83,10 +83,12 @@ interface Cart : Iterable<CartItem> {
 
     /** add an item to the Cart by its SKU */
     fun addBySku(sku: String, qty: Int = 1): CartItem
+
     // TODO: return a boolean for add and remove
     fun addItem(item: CartItem) // TODO: remove
     fun removeItem(item: CartItem)
     fun total() = sumByDouble { it.total() }
+    fun checkout()
 }
 
 
@@ -127,5 +129,12 @@ fun createFakeCart(number: Int = -1,
 
             override fun toString(): String {
                 return """Cart (FakeImpl) N°: $number, Date: $date, Time: $time"""
+            }
+
+            override fun checkout() {
+                // record the payment...
+                //cashier.register(cartPayement: Payement) //
+                // record the inventory transaction
+                //inventory.addTransaction(saleTransacion: InvTransaction) // ???
             }
         }
