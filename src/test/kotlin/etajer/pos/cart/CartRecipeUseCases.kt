@@ -1,4 +1,4 @@
-package etajer.pos.objects.cart
+package etajer.pos.cart
 
 import etajer.fake.FakeSKUs
 import org.junit.jupiter.api.Assertions.assertTrue

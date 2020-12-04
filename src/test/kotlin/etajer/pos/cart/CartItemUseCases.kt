@@ -1,4 +1,4 @@
-package etajer.pos.objects.cart
+package etajer.pos.cart
 
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
@@ -6,7 +6,7 @@ import com.gojuno.koptional.Some
 import com.gojuno.koptional.toOptional
 import etajer.fake.FakeSKUs
 import etajer.fake.FakeSaleUnits
-import etajer.pos.objects.SaleUnit
+import etajer.pos.SaleUnit
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
