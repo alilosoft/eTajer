@@ -1,4 +1,4 @@
-package etajer.pos.jdbc
+package etajer.derby
 
 import com.vladsch.kotlin.jdbc.HikariCP
 import javax.sql.DataSource

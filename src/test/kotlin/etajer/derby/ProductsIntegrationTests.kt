@@ -1,4 +1,4 @@
-package etajer.pos.jdbc
+package etajer.derby
 
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional

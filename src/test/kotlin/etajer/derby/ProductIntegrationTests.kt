@@ -1,4 +1,4 @@
-package etajer.pos.jdbc
+package etajer.derby
 
 import com.vladsch.kotlin.jdbc.session
 import com.vladsch.kotlin.jdbc.sqlQuery
