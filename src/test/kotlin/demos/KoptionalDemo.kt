@@ -1,4 +1,4 @@
-package etajer.pos
+package demos
 
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
