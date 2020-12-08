@@ -1,4 +1,4 @@
-package etajer.pos.objects
+package etajer.pos
 
 interface SaleUnit {
     val name: String

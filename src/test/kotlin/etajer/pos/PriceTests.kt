@@ -1,4 +1,4 @@
-package etajer.pos.objects
+package etajer.pos
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotEquals
