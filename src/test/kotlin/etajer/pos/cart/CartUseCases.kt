@@ -5,7 +5,9 @@ import etajer.fake.FakeSaleUnits
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import java.math.BigDecimal
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 
 class CartUseCases {
@@ -88,54 +90,71 @@ interface Cart : Iterable<CartItem> {
     fun addItem(item: CartItem) // TODO: remove
     fun removeItem(item: CartItem)
     fun total() = sumByDouble { it.total() }
-    fun checkout()
+    fun checkout(): Sale
 }
 
 
-fun createFakeCart(number: Int = -1,
-                   date: LocalDate = LocalDate.now(),
-                   time: LocalTime = LocalTime.now()) =
-        object : Cart {
-            override val number: Int = number
-            override val date: LocalDate = date
-            override val time: LocalTime = time
+fun createFakeCart(
+    number: Int = -1,
+    date: LocalDate = LocalDate.now(),
+    time: LocalTime = LocalTime.now()
+) =
+    object : Cart {
+        override val number: Int = number
+        override val date: LocalDate = date
+        override val time: LocalTime = time
 
-            // encapsulated data/db where the Cart items could be stored
-            private val items = mutableListOf<CartItem>()
+        // encapsulated data/db where the Cart items could be stored
+        private val items = mutableListOf<CartItem>()
 
-            // TODO: chose between the following impls.
-            // encapsulated dep. should be passed to a real impl. via the ctor.
-            // a SaleUnitBySku could be used to create a CartItem directly inside the Cart in addBySku(sku) method,
-            // Question: doesn't that violate SRP?
-            private val unitBySku: SaleUnitBySku = FakeSaleUnits // SAM object
+        // TODO: chose between the following impls.
+        // encapsulated dep. should be passed to a real impl. via the ctor.
+        // a SaleUnitBySku could be used to create a CartItem directly inside the Cart in addBySku(sku) method,
+        // Question: doesn't that violate SRP?
+        private val unitBySku: SaleUnitBySku = FakeSaleUnits // SAM object
 
-            // encapsulated dep. should be passed to real impl. via ctor.
-            // a CartItemBySkuFn impl will be responsible for creating the CartItem and returning it to Cart
-            // this will make the logic of creating CartItem independent of Cart, but do we really need this?
-            private val createItemBySku: CartItemBySkuFn = fakeCartItemBySkuFn // functional
+        // encapsulated dep. should be passed to real impl. via ctor.
+        // a CartItemBySkuFn impl will be responsible for creating the CartItem and returning it to Cart
+        // this will make the logic of creating CartItem independent of Cart, but do we really need this?
+        private val createItemBySku: CartItemBySkuFn = fakeCartItemBySkuFn // functional
 
         // create, return & store the item in the Cart items data
         override fun addBySku(sku: String, qty: Int): CartItem? =
             createItemBySku(sku, qty).onSuccess(items::add).getOrNull()
 
-            override fun addItem(item: CartItem) {
-                items.add(item)
-            }
+        override fun addItem(item: CartItem) {
+            items.add(item)
+        }
 
-            override fun removeItem(item: CartItem) {
-                items.remove(item)
-            }
+        override fun removeItem(item: CartItem) {
+            items.remove(item)
+        }
 
-            override fun iterator(): Iterator<CartItem> = items.iterator()
+        override fun iterator(): Iterator<CartItem> = items.iterator()
 
-            override fun toString(): String {
-                return """Cart (FakeImpl) N°: $number, Date: $date, Time: $time"""
-            }
+        override fun toString(): String {
+            return """Cart (FakeImpl) N°: $number, Date: $date, Time: $time"""
+        }
 
-            override fun checkout() {
-                // record the payment...
-                //cashier.register(cartPayement: Payement) //
-                // record the inventory transaction
-                //inventory.addTransaction(saleTransacion: InvTransaction) // ???
+        override fun checkout(): Sale {
+            // an actual relational impl
+            // would start a transaction
+            // insert a sale;
+            // insert sold-items using cart-items checkout() ?
+            // each new sold-item should:
+            //      > calc its cost from the inventory (FIFO)
+            //      > register an InventoryTransaction
+
+            val soldItems = this.flatMap { cartItem -> cartItem.checkout() }
+
+            return object : Sale {
+                override val number: String = "123"
+                override val time: LocalDateTime = LocalDateTime.now()
+                override fun payments(): Payments {
+                    TODO("Not yet implemented")
+                }
+
+                override fun iterator(): Iterator<SoldItem> = soldItems.iterator()
             }
         }
+    }

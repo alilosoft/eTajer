@@ -123,4 +123,6 @@ interface CartItem {
      * total price of this item
      */
     fun total() = soldQty * itemPrice
+
+    fun checkout(): SoldItems
 }
