@@ -13,7 +13,7 @@ class CartUseCases {
     fun `add an item to a Cart (fake) impl`() {
         // Arrange
         val fakeCart = createFakeCart()
-        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)
+        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)!!
         // Act
         fakeCart.addItem(facto)
         println(fakeCart)
@@ -25,7 +25,7 @@ class CartUseCases {
     fun `remove an (existing) item from th Cart`() {
         // Arrange
         val fakeCart = createFakeCart()
-        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)
+        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)!!
         // Act
         fakeCart.addItem(facto)
         assertTrue(fakeCart.iterator().hasNext())
@@ -60,7 +60,7 @@ class CartUseCases {
         // Arrange
         val cart = createFakeCart()
         // Act
-        val item = cart.addBySku(FakeSKUs.FACTO)
+        val item = cart.addBySku(FakeSKUs.FACTO)!!
         // Assert
         assertEquals(1, item.soldQty)
     }
@@ -70,7 +70,7 @@ class CartUseCases {
         // Arrange
         val cart = createFakeCart()
         // Act
-        val item = cart.addBySku(FakeSKUs.FACTO, qty = 3)
+        val item = cart.addBySku(FakeSKUs.FACTO, qty = 3)!!
         // Assert
         assertEquals(3, item.soldQty)
     }
@@ -82,7 +82,7 @@ interface Cart : Iterable<CartItem> {
     val time: LocalTime
 
     /** add an item to the Cart by its SKU */
-    fun addBySku(sku: String, qty: Int = 1): CartItem
+    fun addBySku(sku: String, qty: Int = 1): CartItem?
 
     // TODO: return a boolean for add and remove
     fun addItem(item: CartItem) // TODO: remove
@@ -114,8 +114,9 @@ fun createFakeCart(number: Int = -1,
             // this will make the logic of creating CartItem independent of Cart, but do we really need this?
             private val createItemBySku: CartItemBySkuFn = fakeCartItemBySkuFn // functional
 
-            // create, return & store the item in the Cart items data
-            override fun addBySku(sku: String, qty: Int): CartItem = createItemBySku(sku, qty).apply(items::add)
+        // create, return & store the item in the Cart items data
+        override fun addBySku(sku: String, qty: Int): CartItem? =
+            createItemBySku(sku, qty).onSuccess(items::add).getOrNull()
 
             override fun addItem(item: CartItem) {
                 items.add(item)

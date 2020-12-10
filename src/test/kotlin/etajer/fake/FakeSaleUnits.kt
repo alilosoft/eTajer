@@ -1,7 +1,5 @@
 package etajer.fake
 
-import com.gojuno.koptional.Optional
-import com.gojuno.koptional.toOptional
 import etajer.pos.SaleUnit
 import etajer.pos.cart.SaleUnitBySku
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -40,7 +38,9 @@ object FakeSaleUnits : SaleUnitBySku {
             FakeSKUs.IFRI6B to ifriFardo
     )
 
-    override fun find(sku: String): Optional<SaleUnit> = data[sku].toOptional()
+    override fun find(sku: String): SaleUnit? = data[sku]
+
+    fun findWithSku(sku: String): SaleUnit = data[sku] ?: throw IllegalArgumentException("$sku not found!")
 }
 
 class FakeSaleUnitsTest {

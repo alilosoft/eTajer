@@ -1,11 +1,9 @@
 package etajer.pos
 
-import com.gojuno.koptional.None
-import com.gojuno.koptional.Optional
-import com.gojuno.koptional.Some
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import kotlin.random.Random
 
 class ProductsTest {
 
@@ -27,42 +25,42 @@ class ProductsTest {
     @Nested
     inner class GetProductById {
         @Test // happy path
-        fun `when the id exist, get an Optional of Product`() {
+        fun `may returns a Product`() {
             // Arrange
             // Act
             val p = FakeProducts.byId(123)
             // Assert
-            assertNotNull(p.toNullable())
+            assertNotNull(p)
         }
 
         @Test
-        fun `when the id doesn't exist, get an empty Optional`() {
+        fun `may returns null`() {
             // Arrange
             // Act
             val p = FakeProducts.byId(0)
             // Assert
-            assertEquals(None, p)
+            assertNull(p)
         }
     }
 
     @Nested
     inner class FindByBarcode {
         @Test
-        fun `when the barcode exist, should get an Optional of Product`() {
+        fun `may return a Product`() {
             // Arrange
-            val p: Optional<Product> = FakeProducts.byBarCode("123")
             // Act
+            val p = FakeProducts.byBarCode("123")
             // Assert
-            assertNotNull(p.toNullable())
+            assertNotNull(p)
         }
 
         @Test
-        fun `when the barcode doesn't exist, get an empty Optional`() {
+        fun `may return null`() {
             // Arrange
-            val p = FakeProducts.byBarCode("")
             // Act
+            val p = FakeProducts.byBarCode("")
             // Assert
-            assertEquals(None, p)
+            assertNull(p)
         }
     }
 }
@@ -83,24 +81,19 @@ object FakeProducts : Products {
         return newProd
     }
 
-    override fun byId(id: Int): Optional<Product> =
-            if (id == 0) None
-            else Some(
-                    object : Product {
-                        override val id: Int = id
-                        override val name: String = "test prod"
-                        override val price: Double get() = TODO("Not yet implemented")
-                    }
-            )
+    override fun byId(id: Int): Product?  =
+            if (id <= 0) null
+            else object : Product {
+                override val id: Int = id
+                override val name: String = "test prod"
+                override val price: Double get() = Random.nextDouble(100.0)
+            }
 
-    override fun byBarCode(barCode: String): Optional<Product> {
-        return if (barCode.isBlank()) None
-        else Some(
-                object : Product {
-                    override val id: Int = 0
-                    override val name: String get() = TODO("Not yet implemented")
-                    override val price: Double get() = TODO("Not yet implemented")
-                }
-        )
-    }
+    override fun byBarCode(barCode: String): Product? =
+        if (barCode.isBlank()) null
+        else object : Product {
+            override val id: Int = Random.nextInt(100)
+            override val name: String get() = "test"
+            override val price: Double get() = Random.nextDouble(100.0)
+        }
 }

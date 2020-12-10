@@ -1,8 +1,5 @@
 package etajer.derby
 
-import com.gojuno.koptional.None
-import com.gojuno.koptional.Optional
-import com.gojuno.koptional.Some
 import com.vladsch.kotlin.jdbc.session
 import com.vladsch.kotlin.jdbc.sqlQuery
 import etajer.pos.Product
@@ -23,11 +20,7 @@ class ProductsIntegrationTests {
         // Act
         val prod = DbProducts().byBarCode("005")
         // Assert
-        assertNotNull(prod.toNullable())
-        when (prod) {
-            is Some -> prod.value
-            is None -> println("not found")
-        }
+        assertNotNull(prod)
     }
 }
 
@@ -45,15 +38,15 @@ class DbProducts(private val dataSource: DataSource = DerbyDb.dataSource,
         // insert a new prod to DB
     }
 
-    override fun byId(id: Int): Optional<Product> {
-        return None
+    override fun byId(id: Int): Product {
+        return getProduct(id)
     }
 
-    override fun byBarCode(barCode: String): Optional<Product> {
+    override fun byBarCode(barCode: String): Product? {
         val query = sqlQuery("SELECT id_prod FROM en_stock WHERE cod_bar = ?", barCode)
         val id = session(dataSource).first(query) { row -> row.int("id_prod") }
         println("barcode: $barCode => id: $id") // TODO: add logging
-        return if (id == null) None else Some(getProduct(id))
+        return if (id != null) getProduct(id) else null
     }
 }
 
