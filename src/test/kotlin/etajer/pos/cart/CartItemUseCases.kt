@@ -87,7 +87,10 @@ fun createFakeCartItem(
             override fun checkout(): SoldItems {
                 TODO("Not yet implemented")
             }
-        }
+            override fun toString(): String {
+                return "FakeCartItem[sku:$sku, desc:$itemName, price:$itemPrice, qty:$soldQty]"
+            }
+        } as CartItem
     }
 }
 
