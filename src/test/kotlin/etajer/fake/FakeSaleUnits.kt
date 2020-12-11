@@ -39,8 +39,14 @@ object FakeSaleUnits : SaleUnitBySku {
     )
 
     override fun find(sku: String): SaleUnit? = data[sku]
-
-    fun findWithSku(sku: String): SaleUnit = data[sku] ?: throw IllegalArgumentException("$sku not found!")
+    // as mentioned here: http://disq.us/p/1wxagvf
+    // Exceptions are not suitable for user/domain error reporting
+    // because: 1) they are very slow 2) the user will not need a stacktrace
+    // 3) Exceptions are only for developer (logging, debugging)
+    // Instead of throwing Exceptions for control flow use monadic data types
+    // like: Option, Either, Result or even a Nullable
+    fun findOrThrow(sku: String): SaleUnit = data[sku]
+        ?: throw IllegalArgumentException("SKU: $sku not found!")
 }
 
 class FakeSaleUnitsTest {
