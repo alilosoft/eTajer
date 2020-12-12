@@ -1,5 +1,7 @@
-package etajer.pos
+package etajer.core.product
 
+import etajer.api.product.Product
+import etajer.api.product.Products
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test

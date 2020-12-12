@@ -1,5 +1,6 @@
-package etajer.pos
+package etajer.core.product
 
+import etajer.api.product.SaleUnit
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 

@@ -1,8 +1,8 @@
-package etajer.pos.cart
+package etajer.fake.cart
 
 import etajer.fake.FakeSKUs
 import etajer.fake.FakeSaleUnits
-import etajer.pos.SaleUnit
+import etajer.api.product.SaleUnit
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

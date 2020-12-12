@@ -1,4 +1,4 @@
-package etajer.pos.cart
+package etajer.fake.cart
 
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -6,7 +6,6 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.json.Json
 import javax.json.JsonObject
-import javax.json.JsonValue
 
 interface Sale : Iterable<SoldItem> {
     val number: String
@@ -15,7 +14,7 @@ interface Sale : Iterable<SoldItem> {
     fun total(): BigDecimal = this.sumOf { item -> item.price.multiply(item.qty.toBigDecimal()) }
     fun profit(): BigDecimal = this.total().minus(this.sumOf { item -> item.cost.multiply(item.qty.toBigDecimal()) })
     fun payments(): Payments = object : Payments {
-        val payments = listOf(object : Payment{
+        val payments = listOf(object : Payment {
             override fun value(): BigDecimal = this@Sale.total()
             override val mode: String = "Cash"
         })

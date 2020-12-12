@@ -2,8 +2,8 @@ package etajer.derby
 
 import com.vladsch.kotlin.jdbc.session
 import com.vladsch.kotlin.jdbc.sqlQuery
-import etajer.pos.Product
-import etajer.pos.Products
+import etajer.api.product.Product
+import etajer.api.product.Products
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test

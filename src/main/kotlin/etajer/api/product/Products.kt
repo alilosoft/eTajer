@@ -1,4 +1,4 @@
-package etajer.pos
+package etajer.api.product
 
 interface Products {
     fun add(name: String, price: Double): Product

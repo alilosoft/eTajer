@@ -1,5 +1,6 @@
-package etajer.pos
+package etajer.core.product
 
+import etajer.api.product.Product
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 

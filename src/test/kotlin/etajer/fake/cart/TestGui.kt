@@ -1,4 +1,4 @@
-package etajer.pos.cart
+package etajer.fake.cart
 
 import etajer.fake.FakeSKUs
 import java.awt.Dimension

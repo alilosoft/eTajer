@@ -1,11 +1,10 @@
-package etajer.pos.cart
+package etajer.fake.cart
 
 import etajer.fake.FakeSKUs
 import etajer.fake.FakeSaleUnits
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime

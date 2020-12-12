@@ -1,4 +1,4 @@
-package etajer.pos
+package etajer.api.product
 
 interface Product {
     /**
