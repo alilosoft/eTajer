@@ -1,5 +1,6 @@
 package etajer.fake.cart
 
+import etajer.api.cart.Cart
 import etajer.fake.FakeSKUs
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test

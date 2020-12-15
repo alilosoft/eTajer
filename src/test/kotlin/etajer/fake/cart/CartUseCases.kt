@@ -1,5 +1,10 @@
 package etajer.fake.cart
 
+import etajer.api.cart.Cart
+import etajer.api.cart.CartItem
+import etajer.api.sale.Payments
+import etajer.api.sale.Sale
+import etajer.api.sale.SoldItem
 import etajer.fake.FakeSKUs
 import etajer.fake.FakeSaleUnits
 import org.junit.jupiter.api.Assertions.*
@@ -75,21 +80,6 @@ class CartUseCases {
         // Assert
         assertEquals(3, item.soldQty)
     }
-}
-
-interface Cart : Iterable<CartItem> {
-    val number: Int
-    val date: LocalDate
-    val time: LocalTime
-
-    /** add an item to the Cart by its SKU */
-    fun addBySku(sku: String, qty: Int = 1): CartItem?
-
-    // TODO: return a boolean for add and remove
-    fun addItem(item: CartItem) // TODO: remove
-    fun removeItem(item: CartItem)
-    fun total() = sumByDouble { it.total() }
-    fun checkout(): Sale
 }
 
 

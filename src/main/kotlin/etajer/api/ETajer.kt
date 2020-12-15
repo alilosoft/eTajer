@@ -1,6 +1,8 @@
 package etajer.api
 
 import etajer.api.product.Products
+import etajer.api.sale.Cashiers
+import etajer.api.sale.Sales
 
 interface ETajer {
     val name: String //
