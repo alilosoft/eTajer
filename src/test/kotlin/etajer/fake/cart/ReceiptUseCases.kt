@@ -1,15 +1,12 @@
 package etajer.fake.cart
 
 import etajer.api.cart.Cart
+import etajer.api.sale.Receipt
 import etajer.fake.FakeSKUs
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
-interface CartRecipe {
-    fun print()
-}
-
-fun consoleRecipe(cart: Cart) = object : CartRecipe {
+fun consoleRecipe(cart: Cart) = object : Receipt {
     override fun print() {
         val lineFormat = "%-25s | %-5s| %-3s| %-5s"
 
@@ -25,12 +22,12 @@ fun consoleRecipe(cart: Cart) = object : CartRecipe {
     }
 }
 
-class CartRecipeUseCases {
+class ReceiptUseCases {
     @Test
     fun `print CartRecipe to console`() {
         // Arrange
         var printSpy = false;
-        val consoleRecipe = object : CartRecipe {
+        val consoleRecipe = object : Receipt {
             // a real impl could/should get the Cart by it's ctor.
             private val cart = createFakeCart()
             override fun print() {
