@@ -1,7 +1,7 @@
 package etajer.api.product
 
 interface SaleUnit {
-    val name: String
+    val desc: String
     /**
      * The Unitary price of the this sale unit.
      *

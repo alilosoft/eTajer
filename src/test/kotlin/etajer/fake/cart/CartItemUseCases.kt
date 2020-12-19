@@ -23,7 +23,7 @@ class CartItemUseCases {
             saleUnitBySku = fakeSaleUnitBySku
         )!!
         // Assert
-        assertEquals(coffeeFacto.name, cartItem.itemName)
+        assertEquals(coffeeFacto.desc, cartItem.itemName)
         assertEquals(coffeeFacto.price, cartItem.itemPrice)
     }
 
@@ -72,7 +72,7 @@ fun createFakeCartItem(
     val unit = saleUnitBySku.find(sku) ?: return null
     return object : CartItem {
         private val data = mutableMapOf<String, Any>(
-            "name" to unit.name,
+            "name" to unit.desc,
             "price" to unit.price,
             "qty" to qty
         )

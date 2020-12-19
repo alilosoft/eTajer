@@ -10,7 +10,7 @@ fun createFakeSaleUnit(productName: String,
                        unitQty: Int = 1,
                        unitPrice: Double) =
         object : SaleUnit {
-            override val name: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
+            override val desc: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
             override val price: Double = unitPrice
         }
 
@@ -60,7 +60,7 @@ class FakeSaleUnitsTest {
                 unitPrice = 180.00)
         // Act
         // Assert
-        assertEquals("Water Ifri (Fardo)", ifriFardo.name)
+        assertEquals("Water Ifri (Fardo)", ifriFardo.desc)
     }
 
     @Test
@@ -72,6 +72,6 @@ class FakeSaleUnitsTest {
                 unitPrice = 180.00)
         // Act
         // Assert
-        assertEquals("Water Ifri (x6)", ifri6B.name)
+        assertEquals("Water Ifri (x6)", ifri6B.desc)
     }
 }

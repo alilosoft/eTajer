@@ -17,11 +17,11 @@ class SaleUnitUseCases {
             private val productName = "Water Ifri"
 
             // following is the public API of a SaleUnit, an impl should only expose those properties for clients
-            override val name: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
+            override val desc: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
             override val price: Double = unitPrice
         }
         // Act
-        val saleUnitName = fakeSaleUnit.name
+        val saleUnitName = fakeSaleUnit.desc
         // Assert
         Assertions.assertEquals("Water Ifri (Fardo)", saleUnitName)
     }
