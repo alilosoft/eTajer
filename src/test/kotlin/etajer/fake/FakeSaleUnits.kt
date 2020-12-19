@@ -10,8 +10,11 @@ fun createFakeSaleUnit(productName: String,
                        unitQty: Int = 1,
                        unitPrice: Double) =
         object : SaleUnit {
+            override val sku: String
+                get() = TODO("Not yet implemented")
             override val desc: String = "$productName (${if (unitName.isNotBlank()) unitName else "x$unitQty"})"
             override val price: Double = unitPrice
+            override val qty: Int = unitQty
         }
 
 object FakeSKUs {

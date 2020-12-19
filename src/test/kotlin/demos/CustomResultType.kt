@@ -48,7 +48,7 @@ class CustomResultType {
 
     @Test
     fun `list`() {
-        val r = "1,2,3, ,1 2,4,5"
+        "1,2,3, ,1 2,4,5"
             .split(",")
             .map(::parseInt)
             .map { r -> r.onSuccess { n -> println(n * 10); n * 10 } }

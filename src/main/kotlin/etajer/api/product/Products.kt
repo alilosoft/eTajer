@@ -7,6 +7,5 @@ interface Products {
      * this method will return an instance of Product.
      * Otherwise any implementation should throw an IllegalStateException
      */
-    fun byId(id: Int): Product?
     fun byBarCode(barCode: String): Product?
 }

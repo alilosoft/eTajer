@@ -44,11 +44,9 @@ class CartUseCases {
     fun `add an item to the Cart with invalid SKU`() {
         // Arrange
         val cart = createFakeCart()
-        val sku = "invalid sku"
         // Act
-        val ex = assertThrows<IllegalArgumentException> { cart.addBySku(sku) }
         // Assert
-        assertTrue(ex.message?.contains(sku) ?: false)
+        assertNull(cart.addBySku("bad_sku"))
     }
 
     @Test

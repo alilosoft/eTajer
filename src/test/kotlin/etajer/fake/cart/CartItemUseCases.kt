@@ -6,6 +6,7 @@ import etajer.api.product.SaleUnit
 import etajer.api.cart.CartItem
 import etajer.api.sale.SoldItems
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -28,12 +29,11 @@ class CartItemUseCases {
     }
 
     @Test
-    fun `throws an exception when the SKU is not found`() {
+    fun `return null when the SKU is not found`() {
         // Arrange
         // Act
-        val ex = assertThrows<Throwable> { createFakeCartItem("INVALID") }
         // Assert
-        println(ex.message)
+        assertNull(createFakeCartItem("INVALID"))
     }
 
     @Test
