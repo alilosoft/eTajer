@@ -1,11 +1,14 @@
 plugins {
     kotlin("jvm") version "1.4.20"
+    kotlin("kapt") version "1.4.20"
     application
     checkstyle
 }
 
 repositories {
     jcenter()
+    mavenCentral()
+    maven("https://dl.bintray.com/arrow-kt/arrow-kt/")
 }
 
 dependencies {
@@ -22,6 +25,11 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
     //testImplementation("org.jetbrains.kotlin:kotlin-test")
     //testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    // arrow
+    val arrowVersion = "0.11.0"
+    implementation("io.arrow-kt:arrow-core:$arrowVersion")
+    implementation("io.arrow-kt:arrow-syntax:$arrowVersion")
+    kapt("io.arrow-kt:arrow-meta:$arrowVersion")
 }
 
 application {
