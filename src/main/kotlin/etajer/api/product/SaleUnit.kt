@@ -5,6 +5,7 @@ import java.math.BigDecimal
 interface SaleUnit {
     val sku: String
     val desc: String
+
     /**
      * The Unitary price of the this sale unit.
      * Only implementations of SaleUnit should decide/know how to set/calc/fetch their price.
@@ -12,11 +13,12 @@ interface SaleUnit {
      * or a Promotional price...etc.
      */
     val price: BigDecimal
+
     /**
      * Number of unitary units packed by this SaleUnit.
      * Should be > 1 if it represent a package otherwise  = 1
      */
-    val qty: Int
+    val packedQty: Int
 }
 
 interface SaleUnits : Iterable<SaleUnit> {
@@ -24,6 +26,6 @@ interface SaleUnits : Iterable<SaleUnit> {
         sku: String,
         desc: String = "",
         packedQty: Int = 1,
-        unitPrice: BigDecimal? = null
+        unitPrice: BigDecimal = BigDecimal.ZERO
     )
 }
