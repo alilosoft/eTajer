@@ -1,14 +1,14 @@
 package etajer.fake.cart
 
-import etajer.fake.FakeSKUs
-import etajer.fake.FakeSaleUnits
-import etajer.api.product.SaleUnit
 import etajer.api.cart.CartItem
+import etajer.api.product.SaleUnit
 import etajer.api.sale.SoldItems
+import etajer.fake.FakeSaleUnits
+import etajer.fake.FakeSku
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
+import java.math.BigDecimal
 
 class CartItemUseCases {
 
@@ -38,7 +38,7 @@ class CartItemUseCases {
 
     @Test
     fun `a CartItem can change the qty of sold Units`() {
-        createFakeCartItem(FakeSKUs.FACTO)?.apply {
+        createFakeCartItem(FakeSku.FACTO)?.apply {
             assertEquals(1, soldQty)
             changeQty(5)
             assertEquals(5, soldQty)
@@ -47,7 +47,7 @@ class CartItemUseCases {
 
     @Test
     fun `using Result as return type example`() {
-        fakeCartItemBySkuFn(FakeSKUs.FACTO, 3).onSuccess {
+        fakeCartItemBySkuFn(FakeSku.FACTO, 3).onSuccess {
             assertEquals(3, it.soldQty)
             it.changeQty(5)
             assertEquals(5, it.soldQty)
@@ -77,13 +77,13 @@ fun createFakeCartItem(
             "qty" to qty
         )
         override val itemName: String = data["name"] as String
-        override val soldQty: Int // TODO: use a function instead of property with getter
-            get() = data["qty"] as Int
-        override val itemPrice: Double = data["price"] as Double
+        override val soldQty: Int get() = data["qty"] as Int
+        override val itemPrice: BigDecimal = data["price"] as BigDecimal
         override fun changeQty(newQty: Int) = synchronized(this) { data["qty"] = newQty }
         override fun checkout(): SoldItems {
             TODO("Not yet implemented")
         }
+
         override fun toString(): String {
             return "FakeCartItem[sku:$sku, desc:$itemName, price:$itemPrice, qty:$soldQty]"
         }

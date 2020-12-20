@@ -1,6 +1,6 @@
 package etajer.fake.cart
 
-import etajer.fake.FakeSKUs
+import etajer.fake.FakeSku
 import java.awt.Dimension
 import javax.swing.*
 
@@ -13,8 +13,12 @@ fun main() {
             add(JButton("Create Cart Item (Result)").apply {
                 addActionListener {
                     println("Creating CartItems...")
-                    listOf(FakeSKUs.FACTO, "INVALID", FakeSKUs.IFRI6B, FakeSKUs.MLK500)
-                        .map { sku -> fakeCartItemBySkuFn(sku, 1) }
+                    listOf(
+                        FakeSku.FACTO,
+                        "INVALID",
+                        FakeSku.IFRI_FARDO,
+                        FakeSku.MLK500
+                    ).map { sku -> fakeCartItemBySkuFn(sku, 1) }
                         .map { it.fold(::println, ::showError) }
                 }
             })
@@ -22,10 +26,13 @@ fun main() {
                 addActionListener {
                     println("Creating CartItems...")
                     try {
-                        listOf(FakeSKUs.FACTO, "INVALID", FakeSKUs.IFRI6B, FakeSKUs.MLK500)
-                            .forEach { sku ->
-                                println(fakeCartItemBySkuFn(sku, 1).getOrThrow())
-                            }
+                        listOf(
+                            FakeSku.FACTO, "INVALID",
+                            FakeSku.IFRI_FARDO,
+                            FakeSku.MLK500
+                        ).forEach { sku ->
+                            println(fakeCartItemBySkuFn(sku, 1).getOrThrow())
+                        }
                     } catch (ex: Throwable) {
                         showError(ex)
                     }

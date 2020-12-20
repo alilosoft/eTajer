@@ -6,7 +6,7 @@ import etajer.api.product.SaleUnits
 import java.math.BigDecimal
 import kotlin.random.Random
 
-fun fakeProduct() = object: Product {
+fun fakeProduct() = object : Product {
     override val name: String
         get() = TODO("Not yet implemented")
     override val purchasePrice: BigDecimal
@@ -24,13 +24,15 @@ object FakeProducts : Products {
     private var nextId = 1;
     private val data = mutableMapOf<Int, Product>()
 
-    override fun add(name: String, price: Double): Product {
+    override fun add(
+        name: String,
+        salePrice: BigDecimal,
+        purchasePrice: BigDecimal
+    ): Product {
         val prod = fakeProduct()
         data[nextId++] = prod
         return prod
     }
 
-    override fun byBarCode(barCode: String): Product? =
-        if (barCode.isBlank()) null
-        else fakeProduct()
+    override fun iterator(): Iterator<Product> = data.values.iterator()
 }

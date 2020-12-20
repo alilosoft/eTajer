@@ -5,40 +5,15 @@ import etajer.api.cart.CartItem
 import etajer.api.sale.Payments
 import etajer.api.sale.Sale
 import etajer.api.sale.SoldItem
-import etajer.fake.FakeSKUs
 import etajer.fake.FakeSaleUnits
+import etajer.fake.FakeSku
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
 class CartUseCases {
-    @Test
-    fun `add an item to a Cart (fake) impl`() {
-        // Arrange
-        val fakeCart = createFakeCart()
-        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)!!
-        // Act
-        fakeCart.addItem(facto)
-        println(fakeCart)
-        // Assert
-        assertTrue(fakeCart.iterator().hasNext())
-    }
-
-    @Test
-    fun `remove an (existing) item from th Cart`() {
-        // Arrange
-        val fakeCart = createFakeCart()
-        val facto = createFakeCartItem(FakeSKUs.FACTO, 2)!!
-        // Act
-        fakeCart.addItem(facto)
-        assertTrue(fakeCart.iterator().hasNext())
-        fakeCart.removeItem(facto)
-        // Assert
-        assertFalse(fakeCart.iterator().hasNext())
-    }
 
     @Test
     fun `add an item to the Cart with invalid SKU`() {
@@ -54,7 +29,7 @@ class CartUseCases {
         // Arrange
         val cart = createFakeCart()
         // Act
-        val item = cart.addBySku(FakeSKUs.FACTO)
+        val item = cart.addBySku(FakeSku.FACTO)
         // Assert
         assertTrue(cart.contains(item))
     }
@@ -64,7 +39,7 @@ class CartUseCases {
         // Arrange
         val cart = createFakeCart()
         // Act
-        val item = cart.addBySku(FakeSKUs.FACTO)!!
+        val item = cart.addBySku(FakeSku.FACTO)!!
         // Assert
         assertEquals(1, item.soldQty)
     }
@@ -74,7 +49,7 @@ class CartUseCases {
         // Arrange
         val cart = createFakeCart()
         // Act
-        val item = cart.addBySku(FakeSKUs.FACTO, qty = 3)!!
+        val item = cart.addBySku(FakeSku.FACTO, qty = 3)!!
         // Assert
         assertEquals(3, item.soldQty)
     }

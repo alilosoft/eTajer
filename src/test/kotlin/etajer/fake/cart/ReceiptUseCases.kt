@@ -2,7 +2,7 @@ package etajer.fake.cart
 
 import etajer.api.cart.Cart
 import etajer.api.sale.Receipt
-import etajer.fake.FakeSKUs
+import etajer.fake.FakeSku
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
@@ -14,7 +14,18 @@ fun consoleRecipe(cart: Cart) = object : Receipt {
                     |${lineFormat.format("Product", "Price", "Qty", "Total")}
                     |${"-".repeat(45)}
                     |${
-            cart.fold("", { acc, item -> "$acc${lineFormat.format(item.itemName, item.itemPrice, item.soldQty, item.total())}\n" })
+            cart.fold(
+                "",
+                { acc, item ->
+                    "$acc${
+                        lineFormat.format(
+                            item.itemName,
+                            item.itemPrice,
+                            item.soldQty,
+                            item.total()
+                        )
+                    }\n"
+                })
         }
         |${"-".repeat(45)}
         |${"%45s".format("Total: ${cart.total()}\n")}""".trimMargin()
@@ -45,9 +56,9 @@ class ReceiptUseCases {
     fun `CartRecipe decide how to print a Cart`() {
         // Arrange
         val cart = createFakeCart().apply {
-            addItem(createFakeCartItem(FakeSKUs.IFRI1B, 3)!!)
-            addItem(createFakeCartItem(FakeSKUs.IFRI6B, 1)!!)
-            addItem(createFakeCartItem(FakeSKUs.FACTO, 2)!!)
+            addItem(createFakeCartItem(FakeSku.IFRI_BOTTLE, 3)!!)
+            addItem(createFakeCartItem(FakeSku.IFRI_FARDO, 1)!!)
+            addItem(createFakeCartItem(FakeSku.FACTO, 2)!!)
         }
         val receipt = consoleRecipe(cart)
         // Act
