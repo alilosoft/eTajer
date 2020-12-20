@@ -1,5 +1,7 @@
 package etajer.api.product
 
+import java.math.BigDecimal
+
 interface SaleUnit {
     val sku: String
     val desc: String
@@ -9,7 +11,7 @@ interface SaleUnit {
      * It could be a fixed price ind DB, or calculated based on another Unit price in case of a package,
      * or a Promotional price...etc.
      */
-    val price: Double
+    val price: BigDecimal
     /**
      * Number of unitary units packed by this SaleUnit.
      * Should be > 1 if it represent a package otherwise  = 1
