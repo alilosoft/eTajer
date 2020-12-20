@@ -9,3 +9,11 @@ interface Product {
     val qty: Int
     val saleUnits: SaleUnits
 }
+
+interface Products : Iterable<Product> {
+    fun add(
+        name: String,
+        salePrice: BigDecimal,
+        purchasePrice: BigDecimal = BigDecimal.ZERO
+    ): Product
+}
