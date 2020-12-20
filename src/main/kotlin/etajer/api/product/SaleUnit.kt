@@ -20,5 +20,10 @@ interface SaleUnit {
 }
 
 interface SaleUnits : Iterable<SaleUnit> {
-    //fun add()
+    fun add(
+        sku: String,
+        desc: String = "",
+        packedQty: Int = 1,
+        unitPrice: BigDecimal? = null
+    )
 }

@@ -25,7 +25,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "etajer.cashier.AppKt"
+    mainClass.set("etajer.cashier.AppKt")
 }
 
 tasks {
@@ -41,7 +41,7 @@ tasks {
     }
     jar {
         manifest {
-            attributes("Main-Class" to application.mainClassName)
+            attributes("Main-Class" to application.mainClass.get())
         }
         from(configurations.runtimeClasspath
                 .get()
