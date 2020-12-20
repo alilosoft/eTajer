@@ -1,6 +1,8 @@
 package etajer.api
 
+import etajer.api.inventory.Inventory
 import etajer.api.product.Products
+import etajer.api.purchase.Purchases
 import etajer.api.sale.Cashiers
 import etajer.api.sale.Sales
 
