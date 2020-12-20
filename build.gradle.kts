@@ -44,8 +44,8 @@ tasks {
             attributes("Main-Class" to application.mainClass.get())
         }
         from(configurations.runtimeClasspath
-                .get()
-                .map { file -> if (file.isDirectory) file else zipTree(file) }
+            .get()
+            .map { file -> if (file.isDirectory) file else zipTree(file) }
         )
     }
     checkstyleMain {
