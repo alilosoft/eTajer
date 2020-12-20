@@ -1,6 +1,7 @@
 package etajer.api.cart
 
 import etajer.api.sale.SoldItems
+import java.math.BigDecimal
 
 interface CartItem {
     /**
@@ -21,12 +22,12 @@ interface CartItem {
     /**
      * final sale price of this cart item (after discount or any calc)
      */
-    val itemPrice: Double
+    val itemPrice: BigDecimal
 
     /**
      * total price of this item
      */
-    fun total() = soldQty * itemPrice
+    fun total(): BigDecimal = itemPrice.multiply(BigDecimal(soldQty))
 
     fun checkout(): SoldItems
 }

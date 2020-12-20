@@ -1,6 +1,7 @@
 package etajer.api.cart
 
 import etajer.api.sale.Sale
+import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalTime
 
@@ -14,7 +15,7 @@ interface Cart : Iterable<CartItem> {
 
     // TODO: return a boolean for add and remove
     fun addItem(item: CartItem) // TODO: remove
-    fun removeItem(item: CartItem)
-    fun total() = sumByDouble { it.total() }
+    fun removeItem(item: CartItem) // TODO: replace by CartItem.delete()
+    fun total(): BigDecimal = sumOf { item -> item.total() }
     fun checkout(): Sale
 }
