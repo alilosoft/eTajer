@@ -23,7 +23,7 @@ interface SaleUnit {
     val packedQty: Int
 }
 
-interface SaleUnits : Iterable<SaleUnit> {
+interface SaleUnits : Iterable<SaleUnit>, SaleUnitBySku {
     fun add(
         sku: String,
         desc: String = "",
