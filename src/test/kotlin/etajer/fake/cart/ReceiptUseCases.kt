@@ -19,7 +19,7 @@ fun consoleRecipe(cart: Cart) = object : Receipt {
                 { acc, item ->
                     "$acc${
                         lineFormat.format(
-                            item.itemName,
+                            item.desc,
                             item.itemPrice,
                             item.soldQty,
                             item.total()

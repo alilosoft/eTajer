@@ -26,7 +26,7 @@ class CartItemUseCases {
             saleUnitBySku = fakeSaleUnitBySku
         ).map { cartItem ->
             // Assert
-            assertEquals(coffeeFacto.desc, cartItem.itemName)
+            assertEquals(coffeeFacto.desc, cartItem.desc)
             assertEquals(coffeeFacto.price, cartItem.itemPrice)
         }
     }
@@ -97,7 +97,7 @@ fun createFakeCartItem(
                     "price" to foundUnit.price,
                     "qty" to qty
                 )
-                override val itemName: String = data["desc"] as String
+                override val desc: String = data["desc"] as String
                 override val soldQty: Int get() = data["qty"] as Int
                 override val itemPrice: BigDecimal = data["price"] as BigDecimal
                 override fun changeQty(newQty: Int) = synchronized(this) { data["qty"] = newQty }
@@ -106,7 +106,7 @@ fun createFakeCartItem(
                 }
 
                 override fun toString(): String {
-                    return "FakeCartItem[sku:$sku, desc:$itemName, price:$itemPrice, qty:$soldQty]"
+                    return "FakeCartItem[sku:$sku, desc:$desc, price:$itemPrice, qty:$soldQty]"
                 }
             } //as CartItem
         }

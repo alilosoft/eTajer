@@ -7,7 +7,7 @@ interface CartItem {
     /**
      * name of the sold item as shown to user (in a receipt for example)
      */
-    val itemName: String
+    val desc: String
 
     /**
      * number of sold units in this item
