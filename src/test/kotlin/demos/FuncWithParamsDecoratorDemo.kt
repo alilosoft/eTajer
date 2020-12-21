@@ -1,4 +1,4 @@
-package func_decorator
+package demos
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
