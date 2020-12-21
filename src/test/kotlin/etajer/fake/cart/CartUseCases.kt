@@ -79,7 +79,7 @@ fun createFakeCart(
         // encapsulated dep. should be passed to real impl. via ctor.
         // a CartItemBySkuFn impl will be responsible for creating the CartItem and returning it to Cart
         // this will make the logic of creating CartItem independent of Cart, but do we really need this?
-        private val createItemBySku: CartItemBySkuFn = fakeCartItemBySkuFn // functional
+        private val createItemBySku: CartItemBySkuResult = fakeCartItemBySkuFn // functional
 
         // create, return & store the item in the Cart items data
         override fun addBySku(sku: String, qty: Int): CartItem? =

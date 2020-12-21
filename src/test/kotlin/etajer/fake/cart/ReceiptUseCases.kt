@@ -55,11 +55,12 @@ class ReceiptUseCases {
     @Test
     fun `CartRecipe decide how to print a Cart`() {
         // Arrange
-        val cart = createFakeCart().apply {
-            addItem(createFakeCartItem(FakeSku.IFRI_BOTTLE, 3)!!)
-            addItem(createFakeCartItem(FakeSku.IFRI_FARDO, 1)!!)
-            addItem(createFakeCartItem(FakeSku.FACTO, 2)!!)
-        }
+        val cart = createFakeCart()
+        listOf(
+            FakeSku.IFRI_BOTTLE,
+            FakeSku.IFRI_FARDO,
+            FakeSku.FACTO
+        ).forEach(cart::addBySku)
         val receipt = consoleRecipe(cart)
         // Act
         receipt.print()
