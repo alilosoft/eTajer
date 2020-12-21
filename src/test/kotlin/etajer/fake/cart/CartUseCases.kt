@@ -2,6 +2,7 @@ package etajer.fake.cart
 
 import etajer.api.cart.Cart
 import etajer.api.cart.CartItem
+import etajer.api.product.SaleUnitBySku
 import etajer.api.sale.Payments
 import etajer.api.sale.Sale
 import etajer.api.sale.SoldItem

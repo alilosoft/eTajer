@@ -30,3 +30,11 @@ interface SaleUnits : Iterable<SaleUnit> {
         unitPrice: BigDecimal = BigDecimal.ZERO
     ): Either<String, SaleUnit>
 }
+
+/**
+ * Clients that needs to find a SaleUnit using its SKU
+ * will need an Impl of this interface
+ */
+fun interface SaleUnitBySku {
+    fun find(sku: String): SaleUnit?
+}

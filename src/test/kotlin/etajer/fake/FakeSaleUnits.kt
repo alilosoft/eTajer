@@ -2,7 +2,7 @@ package etajer.fake
 
 import etajer.api.Price
 import etajer.api.product.SaleUnit
-import etajer.fake.cart.SaleUnitBySku
+import etajer.api.product.SaleUnitBySku
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal

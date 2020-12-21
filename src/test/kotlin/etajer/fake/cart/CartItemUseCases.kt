@@ -1,7 +1,7 @@
 package etajer.fake.cart
 
 import etajer.api.cart.CartItem
-import etajer.api.product.SaleUnit
+import etajer.api.product.SaleUnitBySku
 import etajer.api.sale.SoldItems
 import etajer.fake.FakeSaleUnits
 import etajer.fake.FakeSku
@@ -89,11 +89,3 @@ fun createFakeCartItem(
         }
     }
 }
-
-/**
- * Clients that needs to find a SaleUnit using its SKU need to provide an Impl of this interface
- */
-fun interface SaleUnitBySku {
-    fun find(sku: String): SaleUnit?
-}
-
