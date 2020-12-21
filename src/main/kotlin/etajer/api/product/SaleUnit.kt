@@ -1,5 +1,6 @@
 package etajer.api.product
 
+import arrow.core.Either
 import java.math.BigDecimal
 
 interface SaleUnit {
@@ -27,5 +28,5 @@ interface SaleUnits : Iterable<SaleUnit> {
         desc: String = "",
         packedQty: Int = 1,
         unitPrice: BigDecimal = BigDecimal.ZERO
-    )
+    ): Either<String, SaleUnit>
 }
