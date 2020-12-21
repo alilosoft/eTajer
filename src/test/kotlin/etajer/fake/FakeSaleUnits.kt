@@ -1,5 +1,6 @@
 package etajer.fake
 
+import arrow.core.Either
 import etajer.api.Price
 import etajer.api.product.SaleUnit
 import etajer.api.product.SaleUnitBySku
@@ -68,7 +69,8 @@ object FakeSaleUnits : SaleUnitBySku {
         FakeSku.IFRI_FARDO to ifriFardo
     )
 
-    override fun find(sku: String): SaleUnit? = data[sku]
+    override fun find(sku: String): Either<String, SaleUnit> =
+        Either.fromNullable(data[sku]).mapLeft { "SKU $sku not found!" }
 
     // as mentioned here: http://disq.us/p/1wxagvf
     // Exceptions are not suitable for user/domain error reporting

@@ -37,5 +37,5 @@ interface SaleUnits : Iterable<SaleUnit> {
  * will need an Impl of this interface
  */
 fun interface SaleUnitBySku {
-    fun find(sku: String): SaleUnit?
+    fun find(sku: String): Either<String, SaleUnit>
 }
