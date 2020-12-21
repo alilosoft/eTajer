@@ -28,7 +28,7 @@ interface SaleUnits : Iterable<SaleUnit>, SaleUnitBySku {
         sku: String,
         desc: String = "",
         packedQty: Int = 1,
-        unitPrice: BigDecimal = BigDecimal.ZERO
+        price: BigDecimal? = null
     ): Either<String, SaleUnit>
 }
 
